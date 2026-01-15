@@ -58,9 +58,9 @@ useEffect(() => {
         const lastMessage = messages[messages.length - 1];
 
         if (lastMessage.role === 'user' && !isFetchingResponse.current) {
-            isFetchingResponse.current = true; // ✅ Prevent duplicate calls
+            isFetchingResponse.current = true; // Prevent duplicate calls
             GetAiResponse(lastMessage.content).finally(() => {
-                isFetchingResponse.current = false; // ✅ Reset after response
+                isFetchingResponse.current = false; //  Reset after response
             });
         }
     }
@@ -85,7 +85,7 @@ async function GetAiResponse(lastUserMessage) {
     const CodePROMPT = lastUserMessage + Prompt.CODE_GEN_PROMPT;
 
     try {
-        // ✅ Run both AI calls at the same time (MUCH FASTER!)
+        //  Run both AI calls at the same time (MUCH FASTER!)
         const [chatResponse, codeResponse] = await Promise.all([
             axios.post(import.meta.env.VITE_API_URL+"/AiResponse", { PROMPT }),
             axios.post(import.meta.env.VITE_API_URL+"/AiCodeResponse", { CodePROMPT })
